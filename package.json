@@ -1,0 +1,28 @@
+{
+  "name": "sync-runner",
+  "version": "0.0.1",
+  "description": "To execute a binary executable file and return its standard output synchronization.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/index.js",
+    "install": "node-gyp rebuild"
+  },
+  "keywords": [
+    "exec",
+    "sync"
+  ],
+  "author": "XadillaX",
+  "license": "GPLv2",
+  "gypfile": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/XadillaX/syncRunner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/XadillaX/syncRunner/issues"
+  },
+  "homepage": "https://github.com/XadillaX/syncRunner"
+}
