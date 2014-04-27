@@ -1,3 +1,4 @@
+#ifdef _WIN32
 #include <string>
 using namespace std;
 
@@ -70,4 +71,5 @@ string ACPToUTF8(const char* pStrACP)
     delete[] pStr;
 
     return tmp;  
-}  
+}
+#endif

@@ -1,9 +1,9 @@
 var run = require("../");
 
-var res = run("ping 127.0.0.1", 1000);
+var res = run("ping 127.0.0.1");
 console.log(res);
 
-res = run("ls");
+res = run("ls -l");
 console.log(res);
 
 res = run("ls", "test");
