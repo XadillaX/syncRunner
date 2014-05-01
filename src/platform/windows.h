@@ -114,11 +114,11 @@ string run(char* line, char* cwd, int max_million_second)
     }
     CloseHandle(hChildStdoutRd);
 
-	bool isUtf8 = IsUTF8(result.c_str(), result.length());
-	if(!isUtf8)
-	{
-		result = ACPToUTF8(result.c_str());
-	}
+    bool isUtf8 = IsUTF8(result.c_str(), result.length());
+    if(!isUtf8)
+    {
+        result = ACPToUTF8(result.c_str());
+    }
 
     return result;
 }
