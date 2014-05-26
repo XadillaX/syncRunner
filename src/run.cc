@@ -11,12 +11,16 @@ using namespace std;
 // Linux OS
 #include "platform/linux.h"
 #else
+#ifdef __APPLE__
+#include "platform/linux.h"
+#else
 // Other platform OS...
 string run(char* line, char* cwd, int max_million_second)
 {
     ThrowException(Exception::TypeError(String::New("Your OS is not supported yet.")));
     return "";
 }
+#endif
 #endif
 #endif
 

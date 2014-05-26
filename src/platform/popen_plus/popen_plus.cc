@@ -11,7 +11,7 @@
  **    May you find forgiveness for yourself and forgive others.
  **    May you share freely, never taking more than you give.
  **/
-#ifdef __linux
+#ifndef __WIN32
 #include <errno.h>
 #include <sys/types.h>
 #include <fcntl.h>

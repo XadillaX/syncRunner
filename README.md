@@ -24,6 +24,12 @@ console.log(result);
 Change Log
 ----------
 
+### v0.0.5
+
+2014/5/26
+
++ MacOS & Linux support added. (Be careful with Linux, may have Zombie if time exceeded. I'm seeking the solution. MacOS will be OK)
+
 ### v0.0.1
 
 2014/4/27

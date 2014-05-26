@@ -52,7 +52,8 @@ bool parent_process(popen_plus_process* process, int max_million_second, int pid
             write(p[1], "\0", 1);
             close(p[1]);
 
-            printf("%d\n", popen_plus_close(process));
+            //int code = popen_plus_close(process);
+            //printf("进程：%d\n状态码：%d\n", pid, code);
 
             return true;
         }
