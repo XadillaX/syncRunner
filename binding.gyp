@@ -6,11 +6,11 @@
         "src/run.cc",
         "src/platform/popen_plus/popen_plus.cc"
       ],
-	  "conditions": [
-	    ['OS=="win"', {
-		  "defines": [ "_WIN32" ]
-		}]
-	  ]
+    "conditions": [
+      ['OS=="win"', {
+        "defines": [ "_WIN32" ]
+      }]
+    ]
     }
   ]
 }
