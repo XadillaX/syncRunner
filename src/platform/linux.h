@@ -117,11 +117,12 @@ string run(char* line, char* cwd, int max_million_second)
         parent_process(process, max_million_second, pid, p);
 
         int ird = 0;
-        char buf[512] = { 0 };
+        char buf[513] = { 0 };
+        buf[512] = 0;
         string result = "";
         while(1)
         {
-            read(p[0], buf, sizeof(buf));
+            read(p[0], buf, sizeof(buf) - 1);
             if(buf[0] == 0) break;
             result += buf;
         }
