@@ -13,7 +13,8 @@
 void child_process(popen_plus_process* process, int p[])
 {
     close(p[0]);
-    char buf[512] = { 0 };
+    char buf[513] = { 0 };
+    buf[512] = 0;
     while(fgets(buf, sizeof(buf) - 1, process->read_fp) != NULL)
     {
         write(p[1], buf, sizeof(buf));
