@@ -27,6 +27,12 @@ console.log(result);
 Change Log
 ----------
 
+### v0.1.0
+
+2015/1/19
+
++ Support Nodejs v0.11.\* and iojs v1.\*.
+
 ### v0.0.5
 
 2014/5/26
