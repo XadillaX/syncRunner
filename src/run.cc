@@ -13,7 +13,7 @@ using namespace std;
 #include "platform/linux.h"
 #else
 #ifdef __APPLE__
-#include "platform/unix.h"
+#include "platform/linux.h"
 #else
 // Other platform OS...
 string run(char* line, char* cwd, int max_million_second)

@@ -10,6 +10,9 @@
         ['OS=="win"', {
           "defines": [ "_WIN32" ]
         }]
+      ],
+      "include_dirs": [
+          "<!(node -e \"require('nan')\")"
       ]
     }
   ]
