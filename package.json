@@ -10,6 +10,9 @@
     "test": "node test/index.js",
     "install": "node-gyp rebuild"
   },
+  "dependencies": {
+    "nan": "^1.5.1"
+  },
   "keywords": [
     "exec",
     "sync"
