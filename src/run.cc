@@ -1,5 +1,6 @@
 #include <node.h>
 #include <string>
+#include <nan.h>
 using namespace v8;
 using namespace std;
 
@@ -12,33 +13,33 @@ using namespace std;
 #include "platform/linux.h"
 #else
 #ifdef __APPLE__
-#include "platform/linux.h"
+#include "platform/unix.h"
 #else
 // Other platform OS...
 string run(char* line, char* cwd, int max_million_second)
 {
-    ThrowException(Exception::TypeError(String::New("Your OS is not supported yet.")));
+    NanThrowError("Your OS is not supported yet.");
     return "";
 }
 #endif
 #endif
 #endif
 
-Handle<Value> Exec(const Arguments& args)
+NAN_METHOD(Exec)
 {
-    HandleScope scope;
+    NanScope();
 
     int max_million_second = 0;
 
     if(args.Length() < 1)
     {
-        ThrowException(Exception::TypeError(String::New("Wrong number of arguments.")));
-        return scope.Close(String::New(""));
+        NanThrowError("Wrong number of arguments.");
+        NanReturnValue(NanNew<String>(""));
     }
 
     // cmd line...
     char* line = new char[args[0]->ToString()->Length() + 1];
-    Local<String>::Cast(args[0])->WriteAscii(line);
+    strcpy(line, **(new NanAsciiString(args[0])));
 
     // current work directory & max million second...
     char* cwd = NULL;
@@ -52,7 +53,7 @@ Handle<Value> Exec(const Arguments& args)
         if(args[1]->IsString())
         {
             cwd = new char[args[1]->ToString()->Length() + 1];
-            Local<String>::Cast(args[1])->WriteAscii(cwd);
+            strcpy(cwd, **(new NanAsciiString(args[1])));
         }
 
         if(args.Length() > 2 && args[2]->IsNumber())
@@ -73,13 +74,14 @@ Handle<Value> Exec(const Arguments& args)
         delete []cwd;
     }
 
-    return scope.Close(String::New(res.c_str()));
+    NanReturnValue(NanNew<String>(res.c_str()));
 }
 
 void Init(Handle<Object> exports)
 {
-    exports->Set(String::NewSymbol("exec"),
-        FunctionTemplate::New(Exec)->GetFunction());
+    exports->Set(NanNew<String>("exec"),
+        NanNew<FunctionTemplate>(Exec)->GetFunction());
 }
 
 NODE_MODULE(exec_addon, Init)
+
