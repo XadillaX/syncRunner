@@ -30,3 +30,6 @@ unix.h
 .ycm_extra_conf.pyc
 *.swp
 .ropeproject
+
+test/test
+
