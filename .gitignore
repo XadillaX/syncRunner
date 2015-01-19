@@ -25,3 +25,8 @@ build/Release
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules
 .idea
+
+unix.h
+.ycm_extra_conf.pyc
+*.swp
+.ropeproject
