@@ -6,8 +6,11 @@
 #include <sys/wait.h>
 #include <sys/time.h>
 #include <errno.h>
+#include <nan.h>
 #include <string.h>
 #include "popen_plus/popen_plus.h"
+#include <string>
+using namespace std;
 #define LLD long long
 
 void child_process(popen_plus_process* process, int p[])
@@ -84,7 +87,7 @@ string run(char* line, char* cwd, int max_million_second)
     int p[2];
     if(pipe(p) < 0)
     {
-        ThrowException(Exception::Error(String::New("Failed while creating pipe.")));
+        NanThrowError("Failed while creating pipe.");
         return "";
     }
 
@@ -96,7 +99,7 @@ string run(char* line, char* cwd, int max_million_second)
     popen_plus_process* process = popen_plus(line);
     if(NULL == process)
     {
-        ThrowException(Exception::Error(String::New("Failed while running command.")));
+        NanThrowError("Failed while running command.");
         return "";
     }
 
@@ -104,7 +107,8 @@ string run(char* line, char* cwd, int max_million_second)
     int pid = fork();
     if(pid == -1)
     {
-        ThrowException(Exception::Error(String::New("Failed while forking.")));
+        NanThrowError("Failed while forking.");
+        return "";
     }
     else
     if(pid == 0)
@@ -117,7 +121,6 @@ string run(char* line, char* cwd, int max_million_second)
     {
         parent_process(process, max_million_second, pid, p);
 
-        int ird = 0;
         char buf[513] = { 0 };
         buf[512] = 0;
         string result = "";
@@ -132,3 +135,4 @@ string run(char* line, char* cwd, int max_million_second)
         return result;
     }
 }
+
