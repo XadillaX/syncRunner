@@ -3,6 +3,9 @@ Sync Runner
 
 To execute a binary executable file and return its standard output synchronization. (node.js)
 
+> Now **syncRunner** is supporting [Nodejs](http://nodejs.org/) `v0.11.*` and
+> [iojs](http://iojs.org/) `v1.*`!
+
 Installation
 ----------
 
