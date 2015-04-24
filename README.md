@@ -27,6 +27,12 @@ console.log(result);
 Change Log
 ----------
 
+### v0.1.2
+
+2015/4/24
+
++ Fix a compilation bug under windows.
+
 ### v0.1.0
 
 2015/1/19
