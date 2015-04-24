@@ -1,4 +1,5 @@
 #include <node.h>
+#include <nan.h>
 #include <iostream>
 #include <windows.h>
 #include "../util.h"
@@ -58,7 +59,7 @@ string run(char* line, char* cwd, int max_million_second)
         char err[256];
         sprintf(err, "Failed while creating process. [%d. %s]", dw, str.c_str());
 
-        ThrowException(Exception::Error(String::New("Failed while creating pipe.")));
+        NanThrowError(err);
         return "";
     }
 
@@ -83,7 +84,7 @@ string run(char* line, char* cwd, int max_million_second)
         char err[256];
         sprintf(err, "Failed while creating process. [%d. %s]", dw, str.c_str());
 
-        ThrowException(Exception::Error(String::New(err)));
+        NanThrowError(err);
         return "";
     }
     CloseHandle(hChildStdoutWr);

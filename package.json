@@ -1,6 +1,6 @@
 {
   "name": "sync-runner",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "To execute a binary executable file and return its standard output synchronization.",
   "main": "index.js",
   "directories": {
@@ -11,7 +11,7 @@
     "install": "node-gyp rebuild"
   },
   "dependencies": {
-    "nan": "^1.5.1"
+    "nan": "^1.8.2"
   },
   "keywords": [
     "exec",
