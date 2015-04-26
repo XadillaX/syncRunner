@@ -18,14 +18,12 @@ void child_process(popen_plus_process* process, int p[])
     close(p[0]);
     char buf[513] = { 0 };
     buf[512] = 0;
-    while(fgets(buf, sizeof(buf) - 1, process->read_fp) != NULL)
+    while(fgets(buf, sizeof(buf), process->read_fp) != NULL)
     {
         write(p[1], buf, sizeof(buf));
     }
+    write(p[1], "\0", 1);
     close(p[1]);
-
-    // close process...
-    //printf("%d\n", popen_plus_close(process));
 }
 
 // Wait for child process...
@@ -53,12 +51,9 @@ bool parent_process(popen_plus_process* process, int max_million_second, int pid
         else
         if(result == pid)
         {
-            write(p[1], "\0", 1);
+            int status;
+            wait(&status);
             close(p[1]);
-
-            //int code = popen_plus_close(process);
-            //printf("进程：%d\n状态码：%d\n", pid, code);
-
             return true;
         }
 
@@ -96,6 +91,7 @@ string run(char* line, char* cwd, int max_million_second)
     {
         chdir(cwd);
     }
+
     popen_plus_process* process = popen_plus(line);
     if(NULL == process)
     {
@@ -126,7 +122,7 @@ string run(char* line, char* cwd, int max_million_second)
         string result = "";
         while(1)
         {
-            read(p[0], buf, sizeof(buf) - 1);
+            read(p[0], buf, sizeof(buf));
             if(buf[0] == 0) break;
             result += buf;
         }
