@@ -1,6 +1,6 @@
 {
   "name": "sync-runner",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "To execute a binary executable file and return its standard output synchronization.",
   "main": "index.js",
   "directories": {

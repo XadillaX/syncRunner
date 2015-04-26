@@ -27,6 +27,12 @@ console.log(result);
 Change Log
 ----------
 
+### v0.1.3
+
+2015/4/26
+
++ Fix a buffer bug under linux (especially unser CentOS).
+
 ### v0.1.2
 
 2015/4/24
