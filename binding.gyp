@@ -7,7 +7,7 @@
         "src/platform/popen_plus/popen_plus.cc"
       ],
       "conditions": [
-        ['OS=="win"', {
+        ["OS==\"win\"", {
           "defines": [ "_WIN32" ]
         }]
       ],
