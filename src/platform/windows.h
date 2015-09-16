@@ -59,7 +59,7 @@ string run(char* line, char* cwd, int max_million_second)
         char err[256];
         sprintf(err, "Failed while creating process. [%d. %s]", dw, str.c_str());
 
-        NanThrowError(err);
+        Nan::ThrowError(err);
         return "";
     }
 
@@ -84,7 +84,7 @@ string run(char* line, char* cwd, int max_million_second)
         char err[256];
         sprintf(err, "Failed while creating process. [%d. %s]", dw, str.c_str());
 
-        NanThrowError(err);
+        Nan::ThrowError(err);
         return "";
     }
     CloseHandle(hChildStdoutWr);

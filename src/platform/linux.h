@@ -77,12 +77,12 @@ bool parent_process(popen_plus_process* process, int max_million_second, int pid
     }
 }
 
-string run(char* line, char* cwd, int max_million_second)
+string run(const char* line, const char* cwd, int max_million_second)
 {
     int p[2];
     if(pipe(p) < 0)
     {
-        NanThrowError("Failed while creating pipe.");
+        Nan::ThrowError("Failed while creating pipe.");
         return "";
     }
 
@@ -95,7 +95,7 @@ string run(char* line, char* cwd, int max_million_second)
     popen_plus_process* process = popen_plus(line);
     if(NULL == process)
     {
-        NanThrowError("Failed while running command.");
+        Nan::ThrowError("Failed while running command.");
         return "";
     }
 
@@ -103,7 +103,7 @@ string run(char* line, char* cwd, int max_million_second)
     int pid = fork();
     if(pid == -1)
     {
-        NanThrowError("Failed while forking.");
+        Nan::ThrowError("Failed while forking.");
         return "";
     }
     else

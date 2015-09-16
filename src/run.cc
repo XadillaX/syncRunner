@@ -27,61 +27,46 @@ string run(char* line, char* cwd, int max_million_second)
 
 NAN_METHOD(Exec)
 {
-    NanScope();
-
     int max_million_second = 0;
 
-    if(args.Length() < 1)
+    if(info.Length() < 1)
     {
-        NanThrowError("Wrong number of arguments.");
-        NanReturnValue(NanNew<String>(""));
+        return Nan::ThrowError("Wrong number of arguments.");
     }
 
     // cmd line...
-    char* line = new char[args[0]->ToString()->Length() + 1];
-    strcpy(line, **(new NanAsciiString(args[0])));
+    string line = *(String::Utf8Value(info[0]->ToString()));
 
     // current work directory & max million second...
-    char* cwd = NULL;
-    if(args.Length() > 1 && args[1]->IsNumber())
+    string cwd;
+    if(info.Length() > 1 && info[1]->IsNumber())
     {
-        max_million_second = (int)args[1]->NumberValue();
+        max_million_second = (int)info[1]->NumberValue();
     }
     else
-    if(args.Length() > 1)
+    if(info.Length() > 1)
     {
-        if(args[1]->IsString())
+        if(info[1]->IsString())
         {
-            cwd = new char[args[1]->ToString()->Length() + 1];
-            strcpy(cwd, **(new NanAsciiString(args[1])));
+            cwd = *(String::Utf8Value(info[1]->ToString()));
         }
 
-        if(args.Length() > 2 && args[2]->IsNumber())
+        if(info.Length() > 2 && info[2]->IsNumber())
         {
-            max_million_second = (int)args[2]->NumberValue();
+            max_million_second = (int)info[2]->NumberValue();
         }
     }
 
-    string res = run(line, cwd, max_million_second);
+    string res = run(line.c_str(), cwd == "" ? NULL : cwd.c_str(), max_million_second);
 
     // delete the pointer...
-    if(line)
-    {
-        delete []line;
-    }
-    if(cwd)
-    {
-        delete []cwd;
-    }
-
-    NanReturnValue(NanNew<String>(res.c_str()));
+    info.GetReturnValue().Set(Nan::New<String>(res.c_str()).ToLocalChecked());
 }
 
 void Init(Handle<Object> exports)
 {
-    exports->Set(NanNew<String>("exec"),
-        NanNew<FunctionTemplate>(Exec)->GetFunction());
+    exports->Set(Nan::New<String>("exec").ToLocalChecked(),
+            Nan::New<FunctionTemplate>(Exec)->GetFunction());
 }
 
 NODE_MODULE(exec_addon, Init)
-

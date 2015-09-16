@@ -11,14 +11,14 @@
     "install": "node-gyp rebuild"
   },
   "dependencies": {
-    "nan": "^1.8.2"
+    "nan": "^2.0.9"
   },
   "keywords": [
     "exec",
     "sync"
   ],
   "author": "XadillaX",
-  "license": "GPLv2",
+  "license": "MIT",
   "gypfile": true,
   "repository": {
     "type": "git",
