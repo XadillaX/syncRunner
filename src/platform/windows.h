@@ -63,6 +63,11 @@ string run(const char* line, const char* cwd, int max_million_second)
         return "";
     }
 
+    char _line[strlen(line) + 1];
+    char _cwd[strlen(cwd) + 1];
+    strcpy(_line, line);
+    strcpy(_cwd, cwd);
+
     PROCESS_INFORMATION pi;
     STARTUPINFO si = { sizeof(si) };
     si.dwFlags = STARTF_USESTDHANDLES | STARTF_USESHOWWINDOW;
@@ -71,8 +76,8 @@ string run(const char* line, const char* cwd, int max_million_second)
     si.hStdError = hChildStdoutWr;
     si.wShowWindow = SW_HIDE;    
 
-    BOOL bSuccess = CreateProcess(NULL, line, NULL, NULL,  
-        TRUE, 0, NULL, cwd, &si, &pi);
+    BOOL bSuccess = CreateProcess(NULL, _line, NULL, NULL,  
+        TRUE, 0, NULL, _cwd, &si, &pi);
 
     if(!bSuccess)
     {
