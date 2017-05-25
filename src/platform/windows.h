@@ -49,7 +49,7 @@ string GetLastError(DWORD dw)
 }
 
 // run the command line...
-string run(char* line, char* cwd, int max_million_second)
+string run(const char* line, char* cwd, int max_million_second)
 {
     HANDLE hChildStdoutRd, hChildStdoutWr;
     if(!redirect_stdio(&hChildStdoutRd, &hChildStdoutWr))
