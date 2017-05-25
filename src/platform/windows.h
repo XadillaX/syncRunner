@@ -63,8 +63,8 @@ string run(const char* line, const char* cwd, int max_million_second)
         return "";
     }
 
-    char _line[strlen(line) + 1];
-    char _cwd[strlen(cwd) + 1];
+    char* _line = new char[strlen(line) + 1];
+    char* _cwd = new char[strlen(cwd) + 1];
     strcpy(_line, line);
     strcpy(_cwd, cwd);
 
@@ -89,6 +89,8 @@ string run(const char* line, const char* cwd, int max_million_second)
         char err[256];
         sprintf(err, "Failed while creating process. [%d. %s]", dw, str.c_str());
 
+        delete []_line;
+        delete []_cwd;
         Nan::ThrowError(err);
         return "";
     }
@@ -126,5 +128,7 @@ string run(const char* line, const char* cwd, int max_million_second)
         result = ACPToUTF8(result.c_str());
     }
 
+    delete []_line;
+    delete []_cwd;
     return result;
 }
