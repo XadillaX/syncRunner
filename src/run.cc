@@ -35,25 +35,25 @@ NAN_METHOD(Exec)
     }
 
     // cmd line...
-    string line = *(String::Utf8Value(info[0]->ToString()));
+    string line = *(Nan::Utf8String(info[0]));
 
     // current work directory & max million second...
     string cwd;
     if(info.Length() > 1 && info[1]->IsNumber())
     {
-        max_million_second = (int)info[1]->NumberValue();
+        max_million_second = Nan::To<int32_t>(info[1]).FromJust();
     }
     else
     if(info.Length() > 1)
     {
         if(info[1]->IsString())
         {
-            cwd = *(String::Utf8Value(info[1]->ToString()));
+            cwd = *(Nan::Utf8String(info[1]));
         }
 
         if(info.Length() > 2 && info[2]->IsNumber())
         {
-            max_million_second = (int)info[2]->NumberValue();
+            max_million_second = Nan::To<int32_t>(info[2]).FromJust();
         }
     }
 
@@ -63,10 +63,9 @@ NAN_METHOD(Exec)
     info.GetReturnValue().Set(Nan::New<String>(res.c_str()).ToLocalChecked());
 }
 
-void Init(Handle<Object> exports)
+NAN_MODULE_INIT(Init)
 {
-    exports->Set(Nan::New<String>("exec").ToLocalChecked(),
-            Nan::New<FunctionTemplate>(Exec)->GetFunction());
+    Nan::Export(target, "exec", Exec);
 }
 
 NODE_MODULE(exec_addon, Init)
