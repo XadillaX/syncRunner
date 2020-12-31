@@ -32,4 +32,5 @@ unix.h
 .ropeproject
 
 test/test
-
+.clangd
+compile_commands.json
